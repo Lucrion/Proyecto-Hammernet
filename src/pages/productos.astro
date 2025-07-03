@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
+<script src="../scripts/productos.js"></script>
+
 <Layout title="Productos - Ferretería Patricio">
 	<div class="container mx-auto px-4 py-8">
 		<!-- Barra de búsqueda -->
@@ -42,40 +44,44 @@ import Layout from '../layouts/Layout.astro';
 						<div class="space-y-3">
 							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
 								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
-								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Herramientas Manuales</span>
-								<span class="ml-auto text-gray-500 text-sm">(45)</span>
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Herramientas</span>
 							</label>
 							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
 								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
-								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Herramientas Eléctricas</span>
-								<span class="ml-auto text-gray-500 text-sm">(32)</span>
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Construcción</span>
 							</label>
 							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
 								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
-								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Materiales</span>
-								<span class="ml-auto text-gray-500 text-sm">(78)</span>
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Jardinería y Exteriores</span>
+							</label>
+							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
+								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Electricidad</span>
+							</label>
+							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
+								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Plomería</span>
+							</label>
+							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
+								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Seguridad</span>
+							</label>
+							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
+								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Hogar y Limpieza</span>
+							</label>
+							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
+								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Pinturas</span>
+							</label>
+							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
+								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
+								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Tornillos y Clavos</span>
 							</label>
 						</div>
 					</div>
 
-					<!-- Marcas -->
-					<div class="border-b pb-6">
-						<h3 class="font-semibold mb-4 text-gray-700">Marcas</h3>
-						<div class="space-y-3">
-							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
-								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
-								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Stanley</span>
-							</label>
-							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
-								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
-								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">Bosch</span>
-							</label>
-							<label class="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 cursor-pointer group">
-								<input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded transition duration-150 ease-in-out">
-								<span class="ml-3 text-gray-700 group-hover:text-blue-600 transition-colors duration-200">DeWalt</span>
-							</label>
-						</div>
-					</div>
+
 
 					<!-- Disponibilidad -->
 					<div>
@@ -96,85 +102,11 @@ import Layout from '../layouts/Layout.astro';
 
 			<!-- Productos -->
 			<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-				<!-- Martillo Profesional -->
-				<a href="/productos/martillo-profesional" class="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-duration="1000">
-					<div class="relative overflow-hidden rounded-lg mb-4">
-						<img src="/martillo.svg" alt="Martillo Profesional" class="w-full h-48 object-contain transform group-hover:scale-105 transition-transform duration-300">
-					</div>
-					<h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Martillo Profesional</h3>
-					<p class="text-sm text-gray-600 mt-2">Mango ergonómico | 16 oz</p>
-					<p class="text-blue-600 font-medium mt-3">$12.990</p>
-				</a>
-
-				<!-- Set de Tornillos -->
-				<a href="/productos/set-tornillos" class="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-					<div class="relative overflow-hidden rounded-lg mb-4">
-						<img src="/martillo.svg" alt="Set de Tornillos" class="w-full h-48 object-contain transform group-hover:scale-105 transition-transform duration-300">
-					</div>
-					<h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Set de Tornillos</h3>
-					<p class="text-sm text-gray-600 mt-2">100 unidades | Varios tamaños</p>
-					<p class="text-blue-600 font-medium mt-3">$8.990</p>
-				</a>
-
-				<!-- Destornillador Phillips -->
-				<a href="/productos/destornillador-phillips" class="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-					<div class="relative overflow-hidden rounded-lg mb-4">
-						<img src="/martillo.svg" alt="Destornillador Phillips" class="w-full h-48 object-contain transform group-hover:scale-105 transition-transform duration-300">
-					</div>
-					<h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Destornillador Phillips</h3>
-					<p class="text-sm text-gray-600 mt-2">Punta magnética | #2</p>
-					<p class="text-blue-600 font-medium mt-3">$5.990</p>
-				</a>
-
-				<!-- Clavos Galvanizados -->
-				<a href="/productos/clavos-galvanizados" class="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-					<div class="relative overflow-hidden rounded-lg mb-4">
-						<img src="/martillo.svg" alt="Clavos Galvanizados" class="w-full h-48 object-contain transform group-hover:scale-105 transition-transform duration-300">
-					</div>
-					<h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Clavos Galvanizados</h3>
-					<p class="text-sm text-gray-600 mt-2">2 pulgadas | 500g</p>
-					<p class="text-blue-600 font-medium mt-3">$3.990</p>
-				</a>
-
-				<!-- Sierra Circular -->
-				<a href="/productos/sierra-circular" class="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-duration="1000">
-					<div class="relative overflow-hidden rounded-lg mb-4">
-						<img src="/martillo.svg" alt="Sierra Circular" class="w-full h-48 object-contain transform group-hover:scale-105 transition-transform duration-300">
-					</div>
-					<h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Sierra Circular</h3>
-					<p class="text-sm text-gray-600 mt-2">1200W | Disco 7-1/4"</p>
-					<p class="text-blue-600 font-medium mt-3">$89.990</p>
-				</a>
-
-				<!-- Taladro Percutor -->
-				<a href="/productos/taladro-percutor" class="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-					<div class="relative overflow-hidden rounded-lg mb-4">
-						<img src="/martillo.svg" alt="Taladro Percutor" class="w-full h-48 object-contain transform group-hover:scale-105 transition-transform duration-300">
-					</div>
-					<h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Taladro Percutor</h3>
-					<p class="text-sm text-gray-600 mt-2">800W | 13mm</p>
-					<p class="text-blue-600 font-medium mt-3">$45.990</p>
-				</a>
-
-				<!-- Llave Ajustable -->
-				<a href="/productos/llave-ajustable" class="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-					<div class="relative overflow-hidden rounded-lg mb-4">
-						<img src="/martillo.svg" alt="Llave Ajustable" class="w-full h-48 object-contain transform group-hover:scale-105 transition-transform duration-300">
-					</div>
-					<h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Llave Ajustable</h3>
-					<p class="text-sm text-gray-600 mt-2">12 pulgadas | Cromo</p>
-					<p class="text-blue-600 font-medium mt-3">$15.990</p>
-				</a>
-
-				<!-- Nivel Láser -->
-				<a href="/productos/nivel-laser" class="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-					<div class="relative overflow-hidden rounded-lg mb-4">
-						<img src="/martillo.svg" alt="Nivel Láser" class="w-full h-48 object-contain transform group-hover:scale-105 transition-transform duration-300">
-					</div>
-					<h3 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Nivel Láser</h3>
-					<p class="text-sm text-gray-600 mt-2">Autonivelante | 15m</p>
-					<p class="text-blue-600 font-medium mt-3">$79.990</p>
-				</a>
+				<!-- Los productos se cargarán dinámicamente desde la API -->
+				<div class="col-span-full text-center py-8">
+					<div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+					<p class="text-gray-500 mt-4">Cargando productos...</p>
+				</div>
 			</div>
 		</div>
 

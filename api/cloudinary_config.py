@@ -1,14 +1,13 @@
 import cloudinary
 import cloudinary.uploader
-import cloudinary.api
 
 # Configuración de Cloudinary
 def configure_cloudinary():
     cloudinary.config(
-        cloud_name="dnmzhpriq",  # Reemplazar con tu cloud_name
-        api_key="134672837851277",        # Reemplazar con tu api_key
-        api_secret="tpvjdMcBLOXWHf3bTeM5z4PMfMI",
-        secure=True# Reemplazar con tu api_secret
+        cloud_name="diblgurfm",  # Reemplazar con tu cloud_name
+        api_key="966794887428161",        # Reemplazar con tu api_key
+        api_secret="po1GteOAi2Zw_G5yxflX7-N3o7k",  # Reemplazar con tu api_secret
+        secure=True
     )
 
 # Función para subir una imagen a Cloudinary
@@ -18,6 +17,9 @@ def upload_image(image_data, public_id=None):
         # Configurar opciones de carga
         upload_options = {
             "folder": "hammernet",  # Carpeta donde se guardarán las imágenes
+            "resource_type": "auto",  # Detectar automáticamente el tipo de recurso
+            "overwrite": True,  # Sobrescribir si existe
+            "unique_filename": True,  # Generar nombre único
         }
         
         # Si se proporciona un public_id, usarlo
@@ -25,12 +27,17 @@ def upload_image(image_data, public_id=None):
             upload_options["public_id"] = public_id
         
         # Subir la imagen
+        print("Iniciando subida a Cloudinary...")
         result = cloudinary.uploader.upload(image_data, **upload_options)
+        print(f"Imagen subida exitosamente. URL: {result.get('secure_url')}")
         
         # Devolver la URL segura de la imagen
         return result["secure_url"]
     except Exception as e:
         print(f"Error al subir imagen a Cloudinary: {e}")
+        # Imprimir más detalles del error para depuración
+        import traceback
+        traceback.print_exc()
         return None
 
 # Función para eliminar una imagen de Cloudinary

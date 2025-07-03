@@ -561,18 +561,36 @@ async def delete_usuario(usuario_id: int, db: Session = Depends(get_db)):
 @app.post("/upload-image", tags=["Imágenes"])
 async def upload_image_to_cloudinary(file: UploadFile = File(...)):
     try:
+        # Verificar que el archivo sea una imagen
+        content_type = file.content_type
+        if not content_type or not content_type.startswith('image/'):
+            raise HTTPException(status_code=400, detail=f"Tipo de archivo no válido: {content_type}. Se esperaba una imagen.")
+        
         # Leer el contenido del archivo
-        contents = await file.read()
+        try:
+            contents = await file.read()
+            if not contents:
+                raise HTTPException(status_code=400, detail="Archivo vacío o corrupto")
+        except Exception as read_error:
+            raise HTTPException(status_code=400, detail=f"Error al leer el archivo: {str(read_error)}")
         
         # Subir la imagen a Cloudinary
+        print(f"Subiendo imagen {file.filename} de tipo {content_type} a Cloudinary...")
         cloudinary_url = upload_image(contents)
         
         if not cloudinary_url:
-            raise HTTPException(status_code=500, detail="Error al subir la imagen a Cloudinary")
+            raise HTTPException(status_code=500, detail="Error al subir la imagen a Cloudinary. Revise los logs del servidor para más detalles.")
         
-        return {"url": cloudinary_url}
+        print(f"Imagen subida exitosamente: {cloudinary_url}")
+        return {"url": cloudinary_url, "filename": file.filename}
+    except HTTPException as he:
+        # Re-lanzar excepciones HTTP ya formateadas
+        raise he
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Error inesperado al subir imagen: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Error inesperado al procesar la imagen: {str(e)}")
 
 # Ruta para subir imágenes en base64 a Cloudinary
 @app.post("/upload-image-base64", tags=["Imágenes"])
@@ -582,6 +600,15 @@ async def upload_image_base64(image_data: str = Form(...)):
         if not image_data or not image_data.startswith('data:image/'):
             raise HTTPException(status_code=400, detail="Formato de imagen no válido")
         
+        # Extraer el tipo de imagen y los datos base64
+        try:
+            # Formato esperado: data:image/jpeg;base64,/9j/4AAQSkZJRg...
+            content_type, encoded_data = image_data.split(';base64,')
+            if not encoded_data:
+                raise ValueError("Datos base64 no encontrados")
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Formato base64 inválido: {str(e)}")
+        
         # Subir la imagen a Cloudinary
         cloudinary_url = upload_image(image_data)
         
@@ -590,7 +617,7 @@ async def upload_image_base64(image_data: str = Form(...)):
         
         return {"url": cloudinary_url}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Error al procesar la imagen: {str(e)}")
 
 # Iniciar el servidor si se ejecuta directamente
 if __name__ == "__main__":
