@@ -12,10 +12,10 @@ from sqlalchemy.orm import Session
 # Configuración del hash de contraseñas
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# Secret key para JWT
-SECRET_KEY = "clave_super_secreta_hammernet"
+# Secret key para JWT - Usar variable de entorno en producción
+SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "clave_super_secreta_hammernet")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 

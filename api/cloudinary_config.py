@@ -1,12 +1,14 @@
 import cloudinary
 import cloudinary.uploader
 
+import os
+
 # Configuración de Cloudinary
 def configure_cloudinary():
     cloudinary.config(
-        cloud_name="diblgurfm",  # Reemplazar con tu cloud_name
-        api_key="966794887428161",        # Reemplazar con tu api_key
-        api_secret="po1GteOAi2Zw_G5yxflX7-N3o7k",  # Reemplazar con tu api_secret
+        cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME", "diblgurfm"),
+        api_key=os.environ.get("CLOUDINARY_API_KEY", "966794887428161"),
+        api_secret=os.environ.get("CLOUDINARY_API_SECRET", "po1GteOAi2Zw_G5yxflX7-N3o7k"),
         secure=True
     )
 

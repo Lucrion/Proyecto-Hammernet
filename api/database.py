@@ -5,7 +5,12 @@ import os
 import json
 
 # Configuración para usar PostgreSQL si está disponible, o JSON como fallback
-DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/ferreteria"
+# Usar variable de entorno DATABASE_URL para producción (Render)
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/ferreteria")
+
+# Render usa postgres:// pero SQLAlchemy requiere postgresql://
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 # Intentar crear el motor de base de datos
 try:
