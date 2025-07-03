@@ -50,6 +50,7 @@ const { title } = Astro.props;
 							Catálogo
 						</a>
 					</li>
+					<!-- Sección de ventas oculta temporalmente
 					<li>
 						<a href="/admin/ventas" class="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
 							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,17 +59,18 @@ const { title } = Astro.props;
 							Ventas
 						</a>
 					</li>
+					-->
 				</ul>
 			</nav>
 			
 			<div class="mt-auto">
-				<a href="/" class="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-					</svg>
-					Salir
-				</a>
-			</div>
+			<button id="btnLogout" class="w-full flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+				</svg>
+				Cerrar Sesión
+			</button>
+		</div>
 		</aside>
 
 		<!-- Contenido principal -->
@@ -94,13 +96,38 @@ const { title } = Astro.props;
 </html>
 
 <script>
-// Script para obtener el nombre del usuario desde localStorage
+// Script para obtener el nombre del usuario desde localStorage y manejar el logout
 document.addEventListener('DOMContentLoaded', () => {
 	const nombreUsuarioElement = document.getElementById('nombreUsuario');
 	const nombreUsuario = localStorage.getItem('nombreUsuario');
+	const btnLogout = document.getElementById('btnLogout');
 	
+	// Verificar si el usuario está autenticado
+	const isLoggedIn = localStorage.getItem('isLoggedIn');
+	if (!isLoggedIn || isLoggedIn !== 'true') {
+		// Redirigir al login si no está autenticado
+		window.location.href = '/login';
+		return;
+	}
+	
+	// Mostrar el nombre del usuario
 	if (nombreUsuario && nombreUsuarioElement) {
 		nombreUsuarioElement.textContent = nombreUsuario;
+	}
+	
+	// Manejar el evento de logout
+	if (btnLogout) {
+		btnLogout.addEventListener('click', () => {
+			// Limpiar datos de autenticación
+			localStorage.removeItem('isLoggedIn');
+			localStorage.removeItem('nombreUsuario');
+			localStorage.removeItem('token');
+			localStorage.removeItem('userId');
+			localStorage.removeItem('role');
+			
+			// Redirigir al login
+			window.location.href = '/login';
+		});
 	}
 });
 </script>

@@ -65,23 +65,61 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-	document.getElementById('loginForm').addEventListener('submit', function(e) {
-		e.preventDefault();
+	document.addEventListener('DOMContentLoaded', () => {
+		const loginForm = document.getElementById('loginForm');
+		const API_URL = 'http://localhost:8000';
 		
-		// Obtener los valores del formulario
-		const usuario = document.getElementById('usuario').value;
-		const password = document.getElementById('password').value;
-		
-		// Simulación de autenticación (en un entorno real, esto se haría en el servidor)
-		if (usuario && password) {
-			// Guardar información del usuario en localStorage
-			localStorage.setItem('nombreUsuario', usuario);
-			localStorage.setItem('isLoggedIn', 'true');
+		loginForm.addEventListener('submit', async (e) => {
+			e.preventDefault();
 			
-			// Redireccionar al panel de administración
-			window.location.href = '/admin';
-		} else {
-			alert('Por favor, ingrese usuario y contraseña');
-		}
+			// Obtener los valores del formulario
+			const usuario = document.getElementById('usuario').value;
+			const password = document.getElementById('password').value;
+			
+			if (!usuario || !password) {
+				alert('Por favor, ingrese usuario y contraseña');
+				return;
+			}
+			
+			try {
+				// Intentar autenticar a través de la API
+				const response = await fetch(`${API_URL}/login`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					body: `username=${encodeURIComponent(usuario)}&password=${encodeURIComponent(password)}`
+				});
+				
+				if (!response.ok) {
+					throw new Error('Error de autenticación');
+				}
+				
+				const data = await response.json();
+				
+				// Guardar estado de autenticación y token
+				localStorage.setItem('isLoggedIn', 'true');
+				localStorage.setItem('nombreUsuario', usuario);
+				localStorage.setItem('token', data.access_token);
+				
+				// Redirigir al panel de administración
+				window.location.href = '/admin';
+			} catch (error) {
+				console.error('Error:', error);
+				
+				// Fallback: autenticación local si la API no está disponible
+				if (usuario === 'admin' && password === 'admin123') {
+					// Guardar estado de autenticación
+					localStorage.setItem('isLoggedIn', 'true');
+					localStorage.setItem('nombreUsuario', usuario);
+					
+					// Redirigir al panel de administración
+					window.location.href = '/admin';
+				} else {
+					// Mostrar mensaje de error
+					alert('Usuario o contraseña incorrectos');
+				}
+			}
+		});
 	});
 </script>

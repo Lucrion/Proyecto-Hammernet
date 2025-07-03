@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "nombre": "Martillo Profesional",
+        "descripcion": "Martillo profesional de acero forjado con mango ergonómico",
+        "caracteristicas": "Peso: 500g, Material: Acero forjado, Mango: Goma antideslizante",
+        "precio": 24.99,
+        "stock": 50,
+        "categoria": "Herramientas manuales",
+        "imagen": "/Martillo.png",
+        "fecha_creacion": "2023-11-15T10:30:00"
+    },
+    {
+        "id": 2,
+        "nombre": "Taladro Inalámbrico",
+        "descripcion": "Taladro inalámbrico de 20V con batería de larga duración",
+        "caracteristicas": "Potencia: 20V, Batería: Li-Ion 2000mAh, Velocidad: 0-1500 RPM",
+        "precio": 89.99,
+        "stock": 25,
+        "categoria": "Herramientas eléctricas",
+        "imagen": "/broca.png",
+        "fecha_creacion": "2023-11-15T11:45:00"
+    },
+    {
+        "id": 3,
+        "nombre": "Juego de Destornilladores",
+        "descripcion": "Set de 10 destornilladores de precisión para diversos usos",
+        "caracteristicas": "Cantidad: 10 piezas, Tipos: Phillips y planos, Material: Cromo-vanadio",
+        "precio": 19.99,
+        "stock": 40,
+        "categoria": "Herramientas manuales",
+        "imagen": "/flexo.jpg",
+        "fecha_creacion": "2023-11-16T09:15:00"
+    }
+]
