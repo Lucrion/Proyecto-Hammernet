@@ -1,0 +1,236 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Simulación de datos de productos
+export async function getStaticPaths() {
+  const rutas = [
+    'ceramica-vintage-gris',
+    'fierro-a63',
+    'broca-centradora',
+    'madera-pino',
+    'cemento',
+    'pasta-muro',
+    'martillo-profesional',
+    'set-tornillos',
+    'destornillador-phillips',
+    'clavos-galvanizados',
+    'sierra-circular',
+    'taladro-percutor',
+    'llave-ajustable',
+    'nivel-laser'
+  ];
+
+  return rutas.map(producto => ({
+    params: { producto },
+  }));
+}
+
+const { producto } = Astro.params;
+
+// Datos de productos
+const productos = {
+  'ceramica-vintage-gris': {
+    nombre: 'Cerámica Vintage Gris',
+    precio: 7990,
+    imagen: '/ceramica-vintage.svg',
+    descripcion: 'Cerámica de diseño vintage con acabado mate, ideal para espacios modernos y rústicos.',
+    caracteristicas: ['45x45 cm', '2.32 m²', 'Resistente al desgaste', 'Antideslizante'],
+    stock: 150
+  },
+  'fierro-a63': {
+    nombre: 'Fierro A-63',
+    precio: 4390,
+    imagen: '/fierro.svg',
+    descripcion: 'Barra de fierro estructural de alta resistencia para construcción.',
+    caracteristicas: ['12 metros', 'Grado A-63', 'Certificado', 'Alta durabilidad'],
+    stock: 200
+  },
+  'broca-centradora': {
+    nombre: 'Broca centradora 3 mm',
+    precio: 2241,
+    imagen: '/broca.svg',
+    descripcion: 'Broca de precisión para iniciar perforaciones con exactitud.',
+    caracteristicas: ['3 mm', 'Acero rápido', 'Punta de centrado', 'Alta precisión'],
+    stock: 75
+  },
+  'madera-pino': {
+    nombre: 'Madera Pino Certificado',
+    precio: 2590,
+    imagen: '/madera.svg',
+    descripcion: 'Tabla de pino tratado y certificado para construcción y carpintería.',
+    caracteristicas: ['Seco Cepillado', '1x4"', '3.2 metros', 'Tratada'],
+    stock: 300
+  },
+  'cemento': {
+    nombre: 'Cementos Cbb',
+    precio: 3990,
+    imagen: '/cemento.svg',
+    descripcion: 'Cemento de alta calidad para construcción general.',
+    caracteristicas: ['25 kg', 'Alta resistencia', 'Secado rápido', 'Uso general'],
+    stock: 1000
+  },
+  'pasta-muro': {
+    nombre: 'Pasta para muro',
+    precio: 5397,
+    imagen: '/pasta.svg',
+    descripcion: 'Pasta para muro de alta calidad, ideal para acabados perfectos.',
+    caracteristicas: ['1 galón', 'Acabado liso', 'Fácil aplicación', 'Interior/Exterior'],
+    stock: 85
+  },
+  'martillo-profesional': {
+    nombre: 'Martillo Profesional',
+    precio: 12990,
+    imagen: '/martillo.svg',
+    descripcion: 'Martillo profesional con mango ergonómico para mayor comodidad y precisión.',
+    caracteristicas: ['Mango ergonómico', '16 oz', 'Alta durabilidad', 'Cabeza de acero'],
+    stock: 50
+  },
+  'set-tornillos': {
+    nombre: 'Set de Tornillos',
+    precio: 8990,
+    imagen: '/martillo.svg',
+    descripcion: 'Set completo de tornillos de diferentes tamaños para múltiples aplicaciones.',
+    caracteristicas: ['100 unidades', 'Varios tamaños', 'Acero galvanizado', 'Incluye estuche'],
+    stock: 200
+  },
+  'destornillador-phillips': {
+    nombre: 'Destornillador Phillips',
+    precio: 5990,
+    imagen: '/martillo.svg',
+    descripcion: 'Destornillador Phillips con punta magnética para un trabajo más preciso.',
+    caracteristicas: ['Punta magnética', '#2', 'Mango antideslizante', 'Acero templado'],
+    stock: 120
+  },
+  'clavos-galvanizados': {
+    nombre: 'Clavos Galvanizados',
+    precio: 3990,
+    imagen: '/martillo.svg',
+    descripcion: 'Clavos galvanizados de alta calidad resistentes a la corrosión.',
+    caracteristicas: ['2 pulgadas', '500g', 'Galvanizados', 'Uso general'],
+    stock: 300
+  },
+  'sierra-circular': {
+    nombre: 'Sierra Circular',
+    precio: 89990,
+    imagen: '/martillo.svg',
+    descripcion: 'Sierra circular potente y precisa para cortes profesionales.',
+    caracteristicas: ['1200W', 'Disco 7-1/4"', 'Ajuste de profundidad', 'Guía láser'],
+    stock: 25
+  },
+  'taladro-percutor': {
+    nombre: 'Taladro Percutor',
+    precio: 45990,
+    imagen: '/martillo.svg',
+    descripcion: 'Taladro percutor profesional para trabajos de alta exigencia.',
+    caracteristicas: ['800W', '13mm', 'Velocidad variable', '2 modos'],
+    stock: 40
+  },
+  'llave-ajustable': {
+    nombre: 'Llave Ajustable',
+    precio: 15990,
+    imagen: '/martillo.svg',
+    descripcion: 'Llave ajustable de cromo-vanadio con acabado cromado.',
+    caracteristicas: ['12 pulgadas', 'Cromo', 'Ajuste preciso', 'Mango ergonómico'],
+    stock: 80
+  },
+  'nivel-laser': {
+    nombre: 'Nivel Láser',
+    precio: 79990,
+    imagen: '/martillo.svg',
+    descripcion: 'Nivel láser autonivelante para mediciones precisas y profesionales.',
+    caracteristicas: ['Autonivelante', '15m', 'Líneas cruzadas', 'Base magnética'],
+    stock: 30
+  }
+};
+
+const productoActual = productos[producto];
+---
+
+<Layout title={`${productoActual?.nombre || 'Producto no encontrado'} - Ferretería Patricio`}>
+	<div class="container mx-auto px-4 py-8">
+		<!-- Breadcrumb -->
+		<nav class="text-sm mb-8">
+			<ol class="list-none p-0 inline-flex">
+				<li class="flex items-center">
+					<a href="/" class="text-gray-500 hover:text-blue-600">Inicio</a>
+					<svg class="w-2 h-2 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+					</svg>
+				</li>
+				<li class="flex items-center">
+					<a href="/productos" class="text-gray-500 hover:text-blue-600">Productos</a>
+					<svg class="w-2 h-2 mx-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+					</svg>
+				</li>
+				<li class="text-gray-800">{productoActual?.nombre || 'Producto no encontrado'}</li>
+			</ol>
+		</nav>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+			<!-- Imagen del producto -->
+			<div class="bg-white p-8 rounded-lg shadow-sm">
+				<img src={productoActual?.imagen} alt={productoActual?.nombre} class="w-full h-auto object-contain">
+			</div>
+
+			<!-- Detalles del producto -->
+			<div>
+				<h1 class="text-3xl font-bold mb-4">{productoActual?.nombre}</h1>
+
+				<!-- Precio -->
+				<div class="text-2xl font-bold text-blue-600 mb-6">${productoActual?.precio?.toLocaleString('es-CL')} / Unidad</div>
+
+				<!-- Descripción -->
+				<div class="prose max-w-none mb-8">
+					<p>{productoActual?.descripcion}</p>
+				</div>
+
+				<!-- Características -->
+				<div class="mb-8">
+					<h2 class="text-xl font-semibold mb-4">Características</h2>
+					<ul class="space-y-2">
+						{productoActual?.caracteristicas.map(caracteristica => (
+							<li class="flex items-center">
+								<span class="mr-2 text-sm">✓</span> {caracteristica}
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- Productos similares -->
+		<section class="mt-16">
+			<h2 class="text-2xl font-bold mb-8">Productos Similares</h2>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+				<a href="/productos/destornillador-pequeno" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1">
+					<img src="/destornillador-pequeno.svg" alt="Destornillador pequeño" class="w-full h-48 object-contain mb-4">
+					<h3 class="font-semibold">Destornillador pequeño</h3>
+					<p class="text-sm text-gray-600">Multipropósito de 1 a 6</p>
+					<p class="text-blue-600 mt-2">$6.890</p>
+				</a>
+
+				<a href="/productos/kit-destornillador" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1">
+					<img src="/kit-destornillador.svg" alt="Kit para destornillador" class="w-full h-48 object-contain mb-4">
+					<h3 class="font-semibold">Kit para destornillador</h3>
+					<p class="text-sm text-gray-600">Con 45 piezas</p>
+					<p class="text-blue-600 mt-2">$14.990</p>
+				</a>
+
+				<a href="/productos/destornillador-magnetico" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1">
+					<img src="/destornillador-magnetico.svg" alt="Destornillador Magnético" class="w-full h-48 object-contain mb-4">
+					<h3 class="font-semibold">Destornillador Magnético</h3>
+					<p class="text-sm text-gray-600">6.35mm de 1 a 9 piezas</p>
+					<p class="text-blue-600 mt-2">$4.590</p>
+				</a>
+
+				<a href="/productos/destornillador-impacto" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1">
+					<img src="/destornillador-impacto.svg" alt="Destornillador de Impacto" class="w-full h-48 object-contain mb-4">
+					<h3 class="font-semibold">Destornillador de Impacto</h3>
+					<p class="text-sm text-gray-600">Con 17 Piezas</p>
+					<p class="text-blue-600 mt-2">$31.900</p>
+				</a>
+			</div>
+		</section>
+	</div>
+</Layout>
