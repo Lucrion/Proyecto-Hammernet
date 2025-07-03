@@ -4,18 +4,18 @@ from sqlalchemy.orm import sessionmaker
 import os
 import json
 
-# Configuración para usar MySQL si está disponible, o JSON como fallback
-DATABASE_URL = "mysql+pymysql://root:@localhost:3306/ferreteria"
+# Configuración para usar PostgreSQL si está disponible, o JSON como fallback
+DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/ferreteria"
 
 # Intentar crear el motor de base de datos
 try:
     engine = create_engine(DATABASE_URL)
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     Base = declarative_base()
-    print("Conexión a MySQL establecida correctamente")
+    print("Conexión a PostgreSQL establecida correctamente")
     USE_DB = True
 except Exception as e:
-    print(f"Error al conectar a MySQL: {e}")
+    print(f"Error al conectar a PostgreSQL: {e}")
     print("Usando almacenamiento JSON como fallback")
     USE_DB = False
 
